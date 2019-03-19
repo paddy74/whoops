@@ -1,28 +1,19 @@
-//Problem Solving and Programming II
-//Name: Patrick T Cox
-//Date: 24 November 2015
-//Final Project
-//peg.cpp
-
-//Program Directives
 #include "peg.h"
 
-//name space
-using namespace std;//standard
 
-//==========================================================================================
-//==========================================================================================
-//ADT member functions
-//class peg
-
-//constructor peg()
-peg :: peg()
+namespace whoops
 {
-    //0 is off board
+
+/* Constructors */
+
+//  Empty constructor
+peg::peg()
+{
+    // 0 is off board
     this->pos = 0;
 }
 
-void peg :: move(int rh)
+void peg::move(int rh)
 {
     if (rh == 0)
     {
@@ -34,10 +25,10 @@ void peg :: move(int rh)
     }
 }
 
-//Operator overloads for ADT peg---------------------
+// Operator overloads for ADT peg---------------------
 
-//'=='
-bool peg :: operator ==(const peg& rh)
+// '=='
+bool peg::operator ==(const peg& rh)
 {
     if (this->pos == rh.pos)
     {
@@ -49,13 +40,13 @@ bool peg :: operator ==(const peg& rh)
     }
 }
 
-//==========================================================================================
-//==========================================================================================
-//ADT member functions
-//class player
+// ==========================================================================================
+// ==========================================================================================
+// ADT member functions
+// class player
 
-//Roll the dice
-int player :: rollDice()
+// Roll the dice
+int player::rollDice()
 {
     int d;
     d = ((rand() % 6) + 1);
@@ -65,8 +56,8 @@ int player :: rollDice()
     return d;
 }
 
-//Finds the first peg at start
-int player :: startFinder()
+// Finds the first peg at start
+int player::startFinder()
 {
     if (this->p1.pos == 0)
     {
@@ -90,8 +81,8 @@ int player :: startFinder()
     }
 }
 
-//Returns number of pegs at position 0
-int player :: startCount()
+// Returns number of pegs at position 0
+int player::startCount()
 {
     int d = 0;
 
@@ -115,8 +106,8 @@ int player :: startCount()
     return d;
 }
 
-//Checks if a given peg is at start
-bool player :: startTest(int whichPeg)
+// Checks if a given peg is at start
+bool player::startTest(int whichPeg)
 {
     int d;
 
@@ -158,8 +149,8 @@ bool player :: startTest(int whichPeg)
     }
 }
 
-//Returns true if a specified peg is home
-bool player :: homeTest(int whichPeg)
+// Returns true if a specified peg is home
+bool player::homeTest(int whichPeg)
 {
     int d;
 
@@ -201,8 +192,8 @@ bool player :: homeTest(int whichPeg)
     }
 }
 
-//Increments specified peg position by rh
-void player :: jump(int whichPeg, int rh)
+// Increments specified peg position by rh
+void player::jump(int whichPeg, int rh)
 {
         switch(whichPeg)
     {
@@ -233,9 +224,9 @@ void player :: jump(int whichPeg, int rh)
     }
 }
 
-//Sets specified peg position to 0
-//Exactly the same as jump but exists for organizational purposes
-void player :: setPos(int whichPeg, int rh)
+// Sets specified peg position to 0
+// Exactly the same as jump but exists for organizational purposes
+void player::setPos(int whichPeg, int rh)
 {
     switch(whichPeg)
     {
@@ -262,8 +253,8 @@ void player :: setPos(int whichPeg, int rh)
     }
 }
 
-//Returns position of specified peg
-int player :: getPos(int whichPeg)
+// Returns position of specified peg
+int player::getPos(int whichPeg)
 {
     int d;
 
@@ -302,15 +293,15 @@ int player :: getPos(int whichPeg)
     return 0;
 }
 
-//Human member functions-------------------------
+// Human member functions-------------------------
 
-//Performs a human turn
-void player :: turnHuman()
+// Performs a human turn
+void player::turnHuman()
 {
     int diceValue = this->dieValue;
     int start = startCount();
 
-    //If all pegs are at start
+    // If all pegs are at start
     if (start == 4)
     {
         if (diceValue == 6)
@@ -319,7 +310,7 @@ void player :: turnHuman()
         }
     }
 
-    //If at least one peg is at start
+    // If at least one peg is at start
     else if (start > 0)
     {
         if (diceValue == 6)
@@ -333,23 +324,23 @@ void player :: turnHuman()
             bool Endloop = false;
             while(!Endloop)
             {
-                //Take user input
-                cout << "\nPlease enter the peg index you would like to move: ";
-                cin >> choice;
+                // Take user input
+                std::cout << "\nPlease enter the peg index you would like to move: ";
+                std::cin >> choice;
 
-                //In case of bad user input
+                // In case of bad user input
                 if ((choice > 4) or (choice < 1))
                 {
-                    cout << "\nThat peg does not exist.";
+                    std::cout << "\nThat peg does not exist.";
                 }
                 else if (homeTest(choice))
                 {
-                    cout << "\nThat peg is already home.";
+                    std::cout << "\nThat peg is already home.";
                     Endloop = false;
                 }
                 else if (startTest(choice))
                 {
-                    cout << "\nThat peg is still at start.";
+                    std::cout << "\nThat peg is still at start.";
                     Endloop = false;
                 }
                 else
@@ -361,7 +352,7 @@ void player :: turnHuman()
         }
     }
 
-    //If no pegs are at start
+    // If no pegs are at start
     else
     {
         int choice;
@@ -369,34 +360,34 @@ void player :: turnHuman()
         bool Endloop = false;
         while(!Endloop)
         {
-            //Take user input
-            cout << "\nPlease enter the peg index you would like to move: ";
-            cin >> choice;
+            // Take user input
+            std::cout << "\nPlease enter the peg index you would like to move: ";
+            std::cin >> choice;
 
-            //In case of bad user input
+            // In case of bad user input
             if ((choice > 4) or (choice < 1))
             {
-                cout << "\nThat peg does not exist.";
+                std::cout << "\nThat peg does not exist.";
             }
             else if (homeTest(choice))
             {
-                cout << "\nThat peg is already home.";
+                std::cout << "\nThat peg is already home.";
                 Endloop = false;
             }
             else
             {
                 jump(choice, diceValue);
                 Endloop = true;
-            }//End of else
-        }//End of while(!Endloop)
-    }//End of else
+            }// End of else
+        }// End of while(!Endloop)
+    }// End of else
 
-}//End of turnHuman()
+}// End of turnHuman()
 
-//Computer member functions-------------------------
+// Computer member functions-------------------------
 
-//Randomly selects a peg choice
-int player :: choiceFinder()
+// Randomly selects a peg choice
+int player::choiceFinder()
 {
     int d;
     d = ( (rand() % 4) + 1 );
@@ -404,14 +395,14 @@ int player :: choiceFinder()
     return d;
 }
 
-//Performs a computer turn
-//Same as turnHuman() except receives choice input from choiceFinder()
-void player :: turnComputer()
+// Performs a computer turn
+// Same as turnHuman() except receives choice input from choiceFinder()
+void player::turnComputer()
 {
     int diceValue = this->dieValue;
     int start = startCount();
 
-    //If all pegs are at start
+    // If all pegs are at start
     if (start == 4)
     {
         if (diceValue == 6)
@@ -420,7 +411,7 @@ void player :: turnComputer()
         }
     }
 
-    //If at least one peg is at start
+    // If at least one peg is at start
     else if (start > 0)
     {
         if (diceValue == 6)
@@ -434,7 +425,7 @@ void player :: turnComputer()
             bool Endloop = false;
             while(!Endloop)
             {
-                //Take random input
+                // Take random input
                 choice = choiceFinder();
 
                 if (homeTest(choice))
@@ -454,7 +445,7 @@ void player :: turnComputer()
         }
     }
 
-    //If no pegs are at start
+    // If no pegs are at start
     else
     {
         int choice;
@@ -462,7 +453,7 @@ void player :: turnComputer()
         bool Endloop = false;
         while(!Endloop)
         {
-            //Take random input
+            // Take random input
             choice = choiceFinder();
 
             if (homeTest(choice))
@@ -473,11 +464,10 @@ void player :: turnComputer()
             {
                 jump(choice, diceValue);
                 Endloop = true;
-            }//End of else
-        }//End of while(!Endloop)
-    }//End of else
+            }
+        }
+    }
 
-}//End of turnComputer()
+}
 
-//==========================================================================================
-//==========================================================================================
+}
